@@ -1,0 +1,716 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SkillLink Kenya | Freelance Marketplace</title>
+
+<style>
+  
+/* Freelancer registration form */
+
+#freelancerForm {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #ddd;
+    max-width: 500px;
+    margin: auto;
+}
+
+#freelancerForm label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #123c69;
+}
+
+#freelancerForm input,
+#freelancerForm select,
+#freelancerForm textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+#freelancerForm textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#freelancerForm button {
+    margin-top: 20px;
+}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+header {
+    background: #123c69;
+    color: white;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 12px;
+    font-size: 13px;
+}
+
+.hero {
+    background: #123c69;
+    color: white;
+    text-align: center;
+    padding: 55px 15px;
+}
+
+.hero h1 {
+    font-size: 30px;
+}
+
+.hero p {
+    line-height: 1.6;
+}
+
+.search-box {
+    background: white;
+    max-width: 450px;
+    margin: 25px auto 0;
+    padding: 7px;
+    border-radius: 8px;
+    display: flex;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.search-box button {
+    background: #08a88a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.container {
+    padding: 25px 16px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    color: #123c69;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.category {
+    background: white;
+    padding: 18px 8px;
+    text-align: center;
+    border-radius: 9px;
+    box-shadow: 0 2px 7px #ddd;
+}
+
+.category span {
+    font-size: 27px;
+}
+
+.category p {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 17px;
+}
+
+.card {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #ddd;
+}
+
+.card h3 {
+    color: #123c69;
+}
+
+.price {
+    color: #079b7e;
+    font-weight: bold;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hire-btn {
+    width: 100%;
+    background: #123c69;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.join {
+    background: #e4f2fa;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.join button {
+    background: #08a88a;
+    color: white;
+    padding: 13px 22px;
+    border: none;
+    border-radius: 6px;
+}
+
+footer {
+    background: #092c50;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+@media (max-width: 380px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 5px;
+    }
+}
+  
+.whatsapp-button {
+    display: inline-block;
+    background: #25D366;
+    color: white;
+    padding: 12px 18px;
+    margin-top: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.whatsapp-button:hover {
+    opacity: 0.85;
+  }
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">SkillLink Kenya</div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#services">Services</a>
+        <a href="#join">Join Us</a>
+    </nav>
+</header>
+
+<section class="hero">
+
+    <h1>Find Talent. Get Work Done.</h1>
+
+    <p>
+        Connect with talented Kenyan freelancers
+        and get quality services at affordable prices.
+    </p>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="search"
+            placeholder="Search services..."
+        >
+
+        <button onclick="searchServices()">
+            Search
+        </button>
+    </div>
+
+</section>
+
+<section class="container">
+
+    <div class="section-title">
+        <h2>Explore Categories</h2>
+        <p>Find the service you need.</p>
+    </div>
+
+    <div class="categories">
+
+        <div class="category">
+            <span>⌨️</span>
+            <p>Typing</p>
+        </div>
+
+        <div class="category">
+            <span>🎨</span>
+            <p>Graphic Design</p>
+        </div>
+
+        <div class="category">
+            <span>💻</span>
+            <p>Web Design</p>
+        </div>
+
+        <div class="category">
+            <span>📝</span>
+            <p>CV Writing</p>
+        </div>
+
+        <div class="category">
+            <span>📊</span>
+            <p>Data Entry</p>
+        </div>
+
+        <div class="category">
+            <span>📱</span>
+            <p>Social Media</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="container" id="services">
+
+    <div class="section-title">
+        <h2>Popular Services</h2>
+        <p>Discover affordable professional services.</p>
+    </div>
+
+    <div class="services" id="serviceList">
+
+        <div class="card">
+            <h3>Typing Services</h3>
+            <p>Document typing and formatting.</p>
+            <p class="price">From KSh 100</p>
+            <button class="hire-btn"
+            onclick="contact('Typing Services')">
+                Hire Freelancer
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Graphic Design</h3>
+            <p>Posters, logos and business cards.</p>
+            <p class="price">From KSh 300</p>
+            <button class="hire-btn"
+            onclick="contact('Graphic Design')">
+                Hire Freelancer
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>Web Design</h3>
+            <p>Modern websites for businesses.</p>
+            <p class="price">From KSh 1,000</p>
+            <button class="hire-btn"
+            onclick="contact('Web Design')">
+                Hire Freelancer
+            </button>
+        </div>
+
+        <div class="card">
+            <h3>CV Writing</h3>
+            <p>Professional CVs and cover letters.</p>
+            <p class="price">From KSh 200</p>
+            <button class="hire-btn"
+            onclick="contact('CV Writing')">
+                Hire Freelancer
+            </button>
+        </div>
+
+    </div>
+
+    <p id="noResults" style="display:none;text-align:center">
+        No matching services found.
+    </p>
+
+</section>
+
+<section class="join" id="join">
+
+    <h2>Are You a Freelancer?</h2>
+
+    <p>
+        Join SkillLink Kenya and showcase your
+        skills to potential customers.
+    </p>
+
+    <button onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
+    Become a Freelancer
+    </button>
+
+</section>
+  
+<section class="container" id="register">
+
+    <div class="section-title">
+        <h2>Join SkillLink Kenya</h2>
+        <p>Create your freelancer profile.</p>
+    </div>
+
+<section id="login">
+    <h2>Freelancer Login</h2>
+
+    <form id="loginForm">
+        <label>Email Address</label>
+        <input
+            type="email"
+            id="loginEmail"
+            required
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            id="loginPassword"
+            required
+        >
+
+        <button type="submit">Login</button>
+
+        <p id="loginMessage"></p>
+    </form>
+</section>
+    <form id="freelancerForm">
+
+        <label>Full Name</label>
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <label>Email Address</label>
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label>Phone Number</label>
+        <input
+            type="tel"
+            id="phone"
+            placeholder="e.g. 07XXXXXXXX"
+            required
+        >
+      <label>
+    <input type="checkbox" id="whatsappConsent">
+    I agree to let clients contact me through WhatsApp.
+      </label>
+
+        <label>Service Category</label>
+        <select id="category" required>
+            <option value="">Choose a service</option>
+            <option>Typing</option>
+            <option>Graphic Design</option>
+            <option>Web Design</option>
+            <option>CV Writing</option>
+            <option>Data Entry</option>
+            <option>Social Media</option>
+            <option>Content Writing</option>
+        </select>
+
+        <label>Describe Your Skills</label>
+        <textarea
+            id="description"
+            placeholder="Tell customers what you can do..."
+            required
+        ></textarea>
+
+        <label>Starting Price (KSh)</label>
+        <input
+            type="number"
+            id="price"
+            placeholder="e.g. 500"
+            min="1"
+            required
+        >
+
+        <button type="submit" class="hire-btn">
+            Register as Freelancer
+        </button>
+
+        <p id="formMessage"></p>
+<div class="form-group">
+  <label for="password">Create Password</label>
+  <input
+    type="password"
+    id="password"x
+    placeholder="Enter a strong password"
+    minlength="8"
+    required
+  >
+</div>
+    </form>
+
+</section>
+
+<footer>
+    <h3>SkillLink Kenya</h3>
+    <p>Connecting Skills to Opportunities.</p>
+    <p>© 2026 SkillLink Kenya</p>
+</footer>
+
+<script>
+
+const SUPABASE_URL = "https://rtzjwvbcltnksyqzgkxm.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_hjEwJkzIx6jNwczaZk3lrw_Bv3zm0iZ";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+function contact(service) {
+    alert("You selected " + service +
+    ". Freelancer contact features are coming soon!");
+}
+
+function joinFreelancer() {
+    alert("Freelancer registration is coming soon!");
+}
+
+function searchServices() {
+
+    let query = document.getElementById("search")
+        .value.toLowerCase();
+
+    let cards = document.querySelectorAll(".card");
+    let count = 0;
+
+    cards.forEach(function(card) {
+
+        if (card.innerText.toLowerCase().includes(query)) {
+            card.style.display = "block";
+            count++;
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("noResults").style.display =
+        count === 0 ? "block" : "none";
+}
+
+
+const form = document.getElementById("freelancerForm");
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+  const whatsappConsent =
+    document.getElementById("whatsappConsent").checked;
+    const category = document.getElementById("category").value;
+    const description = document.getElementById("description").value.trim();
+    const price = Number(document.getElementById("price").value);
+    const password = document.getElementById("password").value;
+
+    const message = document.getElementById("formMessage");
+
+    if (password.length < 8) {
+        message.textContent = "Password must be at least 8 characters.";
+        return;
+    }
+
+    message.textContent = "Creating your account...";
+
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+            data: {
+                full_name: name,
+                contact_phone: phone,
+                category: category,
+                description: description,
+                starting_price: price,
+              whatsapp_consent: whatsappConsent
+            }
+        }
+    });
+
+    if (error) {
+        message.textContent = "Registration failed: " + error.message;
+        return;
+    }
+
+    message.textContent =
+        "Account created! Check your email and verify your address. Then sign in to complete your freelancer profile.";
+
+    form.reset();
+});
+  
+const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const message = document.getElementById("loginMessage");
+
+    message.textContent = "Signing in...";
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+    if (error) {
+        message.textContent = "Login failed: " + error.message;
+        return;
+    }
+
+    const user = data.user;
+    const details = user.user_metadata;
+
+    const { error: profileError } = await supabaseClient
+        .from("freelancers")
+        .upsert({
+            user_id: user.id,
+            full_name: details.full_name,
+            contact_phone: details.contact_phone,
+            category: details.category,
+            description: details.description,
+            starting_price: details.starting_price,
+          whatsapp_consent: details.whatsapp_consent
+        }, {
+            onConflict: "user_id"
+        });
+
+    if (profileError) {
+        message.textContent =
+            "Logged in, but profile saving failed: " + profileError.message;
+        return;
+    }
+
+    message.textContent =
+        "Welcome! Your freelancer profile has been saved successfully.";
+});
+  
+
+async function loadFreelancers() {
+    const serviceList = document.getElementById("serviceList");
+
+    const { data, error } = await supabaseClient
+        .from("freelancers")
+        .select("full_name, contact_phone, category, description, starting_price, whatsapp_consent")
+        .eq("is_approved", true)
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        console.error("Could not load freelancers:", error.message);
+        return;
+    }
+
+    data.forEach(function(person) {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const title = document.createElement("h3");
+        title.textContent = person.category;
+
+        const freelancer = document.createElement("p");
+        freelancer.textContent = "Freelancer: " + person.full_name;
+
+        const details = document.createElement("p");
+        details.textContent = person.description;
+
+        const price = document.createElement("p");
+        price.className = "price";
+        price.textContent = "From KSh " + person.starting_price;
+
+        card.append(title, freelancer, details, price);
+
+        if (person.whatsapp_consent && person.contact_phone) {
+            let number = person.contact_phone.replace(/\D/g, "");
+
+            if (number.startsWith("0")) {
+                number = "254" + number.substring(1);
+            }
+
+            if (number.startsWith("254")) {
+                const whatsapp = document.createElement("a");
+
+                whatsapp.href =
+                    "https://wa.me/" + number +
+                    "?text=" + encodeURIComponent(
+                        "Hello " + person.full_name +
+                        ", I found your service on SkillLink Kenya. I am interested."
+                    );
+
+                whatsapp.target = "_blank";
+                whatsapp.rel = "noopener noreferrer";
+                whatsapp.textContent = "Contact on WhatsApp";
+                whatsapp.className = "whatsapp-button";
+
+                card.appendChild(whatsapp);
+            }
+        }
+
+        serviceList.appendChild(card);
+    });
+}
+
+loadFreelancers();
+</script>
+
+</body>
+</html>
